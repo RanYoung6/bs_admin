@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app" class="loginBg">
 		<transition name="fade"
 		            mode="out-in">
 			<router-view></router-view>
@@ -27,7 +27,9 @@ body {
 	font-size: 14px;
 	-webkit-font-smoothing: antialiased;
 }
-
+.loginBg{
+	background: url(assets/bg1.jpg) center no-repeat !important;
+}
 #app {
 	position: absolute;
 	top: 0px;
