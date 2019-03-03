@@ -17,24 +17,23 @@
 
 		<!--列表-->
 		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
-			<el-table-column type="selection" width="40" align="center">
+			<el-table-column type="selection" width="55">
 			</el-table-column>
-			<el-table-column type="index" width="60" align="center">
+			<el-table-column type="index" width="60">
 			</el-table-column>
-			<el-table-column prop="name" label="姓名" width="120" sortable align="center">
+			<el-table-column prop="name" label="姓名" width="120" sortable>
 			</el-table-column>
-			<el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable align="center">
+			<el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable>
 			</el-table-column>
-			<el-table-column prop="age" label="年龄" width="100" sortable align="center">
+			<el-table-column prop="age" label="年龄" width="100" sortable>
 			</el-table-column>
-			<el-table-column prop="birth" label="生日" width="120" sortable align="center">
+			<el-table-column prop="birth" label="生日" width="120" sortable>
 			</el-table-column>
-			<el-table-column prop="addr" label="地址" min-width="115" sortable align="center">
+			<el-table-column prop="addr" label="地址" min-width="180" sortable>
 			</el-table-column>
-			<el-table-column label="操作" width="210" align="center">
+			<el-table-column label="操作" width="150">
 				<template scope="scope">
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-					<el-button size="small" type="primary" @click="handleRoleEdit(scope.$index, scope.row)">角色</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -101,29 +100,6 @@
 				<el-button @click.native="addFormVisible = false">取消</el-button>
 				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
 			</div>
-		</el-dialog>
-		<!--角色配置-->
-		<el-dialog title="配置用户角色" v-model="dialogVisible" size="tiny">
-			<div class="select-tree">
-				<el-scrollbar
-						tag="div"
-						class='is-empty'
-						wrap-class="el-select-dropdown__wrap"
-						view-class="el-select-dropdown__list">
-					<el-tree
-							ref="roleTree"
-							:data="roleTree"
-							show-checkbox
-							check-strictly
-							node-key="id" v-loading="dialogLoading"
-							:props="defaultProps">
-					</el-tree>
-				</el-scrollbar>
-			</div>
-			<span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="configUserRoles">确 定</el-button>
-          </span>
 		</el-dialog>
 	</section>
 </template>
@@ -229,32 +205,6 @@
 			handleEdit: function (index, row) {
 				this.editFormVisible = true;
 				this.editForm = Object.assign({}, row);
-			},
-			handleRoleEdit:function(index,row){
-				this.currentRow = row;
-				this.dialogVisible = true;
-				if (this.roleTree.length <= 0) {
-					sysApi.roleList({selectChildren:true})
-							.then(res => {
-								this.roleTree = res
-							})
-				}
-				this.$http.get(api.SYS_USER_ROLE + "?id=" + row.id)
-						.then(res => {
-							this.$refs.roleTree.setCheckedKeys(res.data);
-						}).catch(err=>{
-
-				})
-			},
-			configUserRoles(){
-				let checkedKeys = this.$refs.roleTree.getCheckedKeys();
-				this.$http.get(api.SYS_SET_USER_ROLE + "?userId=" + this.currentRow.id + "&roleIds="+checkedKeys.join(','))
-						.then(res => {
-							this.$message({
-								message:'修改成功',
-								type: 'success'
-							});
-						})
 			},
 			//显示新增界面
 			handleAdd: function () {

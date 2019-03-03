@@ -13,7 +13,9 @@
                  show-checkbox
                  highlight-current
                  :render-content="renderContent"
-                 @node-click="handleNodeClick" clearable node-key="id" :props="defaultProps"></el-tree>
+                 @node-click="handleNodeClick" clearable node-key="id" :props="defaultProps">
+
+        </el-tree>
       </el-col>
       <el-col :span="18" :xs="24" :sm="24" :md="18" :lg="18">
         <el-card class="box-card">

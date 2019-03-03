@@ -1,14 +1,15 @@
 import Login from './views/Login.vue'
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
-import Sendinfo from './views/nav3/Sendinfo.vue'
+import SendInfo from './views/nav2/SendInfo.vue'
 import Setting from './views/Setting.vue'
 import stuNews from './views/dongtai/stuNews.vue'
-import Form from './views/nav1/Form.vue'
+import ApplyForm from './views/nav1/ApplyForm.vue'
 import organization from './views/dongtai/organization.vue'
 import Page5 from './views/nav2/Page5.vue'
 import userTable from './views/nav3/userTable'
 import activityTable from './views/nav3/activityTable'
+import articleTable from './views/nav3/articleTable'
 import  role from './views/nav3/role'
 import  resource from './views/nav3/resource'
 import echarts from './views/charts/echarts.vue'
@@ -51,8 +52,7 @@ let routes = [
         iconCls: 'fa fa-edit',//图标样式class
         children: [
             // { path: '/table', component: Table, name: 'Table' },
-            // { path: '/user', component: user, name: '列表' },
-            { path: '/sendinfo', component: Sendinfo,name: "发布动态"}
+            { path: '/SendInfo', component: SendInfo,name: "发布动态"}
         ]
     },
     {
@@ -61,7 +61,7 @@ let routes = [
         name: '活动',
         iconCls: 'fa fa-grav',
         children: [
-            { path: '/form', component: Form, name: '活动申请'},
+            { path: '/ApplyForm', component: ApplyForm, name: '活动申请'},
             { path: '/page5', component: Page5, name: '活动审批' }
         ]
     },
@@ -72,8 +72,9 @@ let routes = [
         name: '系统管理',
         iconCls: 'fa fa-gears',
         children: [
-            { path: '/usertable', component: userTable, name: '用户管理'},
-            { path: '/activitytable', component: activityTable, name: '活动管理' },
+            { path: '/userTable', component: userTable, name: '用户管理'},
+            { path: '/activityTable', component: activityTable, name: '活动管理' },
+            { path: '/articleTable',component:articleTable,name:'动态管理'},
             { path: '/role', component:role, name:'角色管理'},
             { path: '/resource', component:resource, name:'资源管理'},
             { path: '/echarts', component: echarts, name: 'echarts' }
